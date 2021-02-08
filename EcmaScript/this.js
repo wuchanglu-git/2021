@@ -10,3 +10,5 @@ Function.prototype.softBind=function(target){
     returnFn.prototype=Object.create(fn.prototype)
     return returnFn
 }
+console.log('dwqdwq撒打算')
+console.log(2)
