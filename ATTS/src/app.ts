@@ -1,6 +1,6 @@
 import { Component } from 'react'
 import sr from 'sr-sdk-wxapp'
-
+import 'taro-ui/dist/style/index.scss'
 import './app.less'
 
 /**
