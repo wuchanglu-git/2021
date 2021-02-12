@@ -1,7 +1,7 @@
 {
   "miniprogramRoot": "dist/",
   "projectname": "ATTS",
-  "description": "analyze the time spent(分析用掉的时间)",
+  "description": "ATTS分析用掉的时间",
   "appid": "touristappid",
   "setting": {
     "urlCheck": true,
@@ -23,21 +23,20 @@
     "compileHotReLoad": false,
     "useMultiFrameRuntime": true,
     "useApiHook": true,
-    "useApiHostProcess": false,
+    "useApiHostProcess": true,
     "babelSetting": {
       "ignore": [],
       "disablePlugins": [],
       "outputPath": ""
     },
-    "enableEngineNative": false,
-    "bundle": false,
     "useIsolateContext": true,
     "useCompilerModule": true,
     "userConfirmedUseCompilerModuleSwitch": false,
     "userConfirmedBundleSwitch": false,
     "packNpmManually": false,
     "packNpmRelationList": [],
-    "minifyWXSS": true
+    "minifyWXSS": true,
+    "bundle": false
   },
   "compileType": "miniprogram",
   "condition": {}

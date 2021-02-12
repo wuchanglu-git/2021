@@ -1,18 +1,10 @@
 import React, { Component } from 'react'
-import { View, Text,Button } from '@tarojs/components'
-import './index.less'
-import {navigateTo} from '@tarojs/taro'
+import { AtButton } from 'taro-ui'
+import { View, Text } from '@tarojs/components'
+import './index.scss'
 
 export default class Index extends Component {
-  constructor(props){
-    super(props)
-    this.onButtonClick=this.onButtonClick.bind(this)
-  }
-  onButtonClick(){
-    navigateTo({
-      url:'/pages/my/index'
-    })
-  }
+
   componentWillMount () { }
 
   componentDidMount () { }
@@ -24,11 +16,10 @@ export default class Index extends Component {
   componentDidHide () { }
 
   render () {
-    const {onButtonClick}=this
     return (
       <View className='index'>
-        <Text>index</Text>
-        <Button onClick={onButtonClick}>点击跳转</Button>
+        <Text>Hello world!</Text>
+        <AtButton type='primary'>按钮文案</AtButton>
       </View>
     )
   }

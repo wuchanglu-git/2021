@@ -1,6 +1,6 @@
 const config = {
     projectName: 'ATTS',
-    date: '2021-2-10',
+    date: '2021-2-12',
     designWidth: 750,
     deviceRatio: {
         640: 2.34 / 2,
