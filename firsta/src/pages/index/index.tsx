@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import { View, Text } from '@tarojs/components'
 import './index.scss'
-
+import Section1 from './components/section1'
+import Section2 from './components/section2'
+import Section3 from './components/section3'
 export default class Index extends Component {
 
   componentWillMount () { }
@@ -17,7 +19,9 @@ export default class Index extends Component {
   render () {
     return (
       <View className='index'>
-        <Text>Hello world!</Text>
+        <Section1/>
+        <Section2/>
+        <Section3/>
       </View>
     )
   }

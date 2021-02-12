@@ -1,0 +1,63 @@
+.section1 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    width: 375px;
+    height: 750px;
+    background-image: url('../../../images/index/bg1.png');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    text-align: center;
+    &__logo2 {
+        position: absolute;
+        top: 49px;
+        left: 20px;
+        width: 99px;
+        height: 24px;
+    }
+    &__logo {
+        margin: 208px 139px 70px 139px;
+        width: 98px;
+        height: 120px;
+    }
+    &__title {
+        display: block;
+        margin-bottom: 17px;
+        font-family: AlibabaPuHuiTi-Bold;
+        font-size: 30px;
+        color: #FFFFFF;
+        letter-spacing: 0.36px;
+    }
+    &__introduce {
+        display: block;
+        margin-bottom: 20px;
+        font-family: PingFangSC-Medium;
+        font-size: 16px;
+        color: #FFFFFF;
+        letter-spacing: 0.19px;
+    }
+    &__nav {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        .nav {
+            &__button {
+                margin-right: 5px;
+                width: 180px;
+                height: 50px;
+                line-height: 50px;
+                text-align: center;
+                font-family: PingFangSC-Light;
+                font-size: 20px;
+                color: #FFFFFF;
+                letter-spacing: 0.24px;
+                background: #272530;
+            }
+            &__icon {
+                width: 50px;
+                height: 50px;
+            }
+        }
+    }
+}

@@ -1,0 +1,41 @@
+.section2 {
+    margin-top: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 375px;
+    height: 200px;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-image: url('../../../images/index/bg2.png');
+    &__title {
+        margin: 50px auto 15px auto;
+        font-family: AlibabaPuHuiTi-Bold;
+        font-size: 28px;
+        color: #FFFFFF;
+        letter-spacing: 0.34px;
+        text-align: center;
+    }
+    &__start {
+        margin: 0 auto 12px auto;
+        width: 210px;
+    }
+    &__label {
+        font-family: PingFangSC-Light;
+        font-size: 14px;
+        color: #FFFFFF;
+        letter-spacing: 0.17px;
+        text-align: center;
+    }
+}
+
+.com_star {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.com_star-pic {
+    width: 29px;
+    height: 28px;
+}
