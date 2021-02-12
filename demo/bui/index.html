@@ -5,55 +5,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="./style.css">
 </head>
 
 <body>
-    <canvas id='bui' width="500" height="500" style="background-color: azure;"></canvas>
-    <button id="save">保存</button>
-    <button id="reset">重置</button>
-    <script src="./index.js"></script>
-    <script src="./position.js"></script>
-    <script>
-        let index = 0
-        const blackList = [].concat(JSON.parse(body), JSON.parse(face))
-        const blackPromise = new Promise((resolve, reject) => {
-            function renderBlack() {
-                requestAnimationFrame(() => {
-                    const val = blackList[index]
-                    if (val) {
-                        draw(ctx,
-                            val.start,
-                            val.end)
-                        index++
-                        renderBlack()
-                    } else {
-                        resolve(true)
-                    }
-                })
-            }
-            renderBlack()
-        })
-        blackPromise.then(() => {
-            ctx.beginPath();
-            index = 0
-            ctx.strokeStyle = '#ffc0cb'
-            const redList = JSON.parse(red)
+    <main class="main">
+        <section class="left">
+            <canvas id='bui' width="400" height="500" style="background-color: azure;"></canvas>
+            <div class="operation">
+                <button id="save">保存</button>
+                <button id='back'>撤销</button>
+                <button id="reset">重置</button>
+                <button id="render">渲染</button>
+            </div>
+        </section>
+        <section class="right">
+            <canvas id="renderCanvas" width="400" height="500"></canvas>
+        </section>
+    </main>
 
-            function renderRed() {
-                requestAnimationFrame(() => {
-                    const val = redList[index]
-                    if (val) {
-                        draw(ctx,
-                            val.start,
-                            val.end)
-                        index++
-                        renderRed()
-                    }
-                })
-            }
-            renderRed()
-        })
-    </script>
+    <script src="./index.js"></script>
 </body>
 
 </html>
