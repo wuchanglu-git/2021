@@ -1,0 +1,99 @@
+.section4 {
+    margin-top: 5px;
+    width: 375px;
+    height: 490px;
+    background: #F7F7FA;
+    overflow: hidden;
+    &__title {
+        display: flex;
+        align-items: center;
+        width: 375px;
+        padding: 60px 0 30px 20px;
+        font-family: AlibabaPuHuiTi-Bold;
+        font-size: 28px;
+        color: #26253E;
+        letter-spacing: 0.34px;
+    }
+    &__title::after {
+        // position: absolute;
+        // left: 265px;
+        content: '';
+        flex-grow: 1;
+        margin-left: 20px;
+        height: 4px;
+        background: #FDDC75;
+    }
+    &__list {
+        display: flex;
+        padding: 0 20px;
+    }
+    &__normal-card {
+        margin-left: 10px;
+    }
+    &__wrapper {
+        padding-top: 65px;
+        overflow-x: auto;
+    }
+}
+
+.com_evaluate-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 230px;
+    height: 260px;
+    text-align: center;
+    background: #FFFFFF;
+}
+
+.com_ec- {
+    &avator {
+        margin-top: -30px;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+    }
+    &name {
+        margin-top: 16px;
+        display: block;
+        font-family: PingFangSC-Regular;
+        font-size: 18px;
+        color: #333333;
+        letter-spacing: 0.22px;
+    }
+    &message {
+        margin-top: 5px;
+        display: block;
+        font-family: PingFangSC-Light;
+        font-size: 16px;
+        color: #BCC7D6;
+        letter-spacing: 0.19px;
+    }
+    &border {
+        margin-top: 11px;
+        border-top: 1px solid #EEEEEE;
+        width: 100%;
+    }
+    &star {
+        margin-top: 14px;
+        width: 110px;
+    }
+    &context {
+        margin-top: 10px;
+        display: block;
+        padding: 0 16px;
+        font-family: PingFangSC-Light;
+        font-size: 14px;
+        color: #666666;
+        letter-spacing: 0.17px;
+    }
+    &label {
+        margin-top: 14px;
+        display: block;
+        font-family: PingFangSC-Light;
+        font-size: 14px;
+        color: #666666;
+        letter-spacing: 0.17px;
+    }
+}
