@@ -39,25 +39,6 @@
     }
     &__nav {
         display: flex;
-        align-items: center;
         justify-content: center;
-        .nav {
-            &__button {
-                margin-right: 5px;
-                width: 180px;
-                height: 50px;
-                line-height: 50px;
-                text-align: center;
-                font-family: PingFangSC-Light;
-                font-size: 20px;
-                color: #FFFFFF;
-                letter-spacing: 0.24px;
-                background: #272530;
-            }
-            &__icon {
-                width: 50px;
-                height: 50px;
-            }
-        }
     }
 }

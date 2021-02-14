@@ -1,6 +1,6 @@
 import React from 'react'
 import { View, Image } from '@tarojs/components'
-import star from '../images/index/star.png'
+import star from '../../images/index/star.png'
 import './star.scss'
 interface StartProps {
     total: number, 

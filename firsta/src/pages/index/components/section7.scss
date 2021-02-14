@@ -1,0 +1,44 @@
+.section7 {
+    padding-top: 40px;
+    padding-left: 20px;
+    width: calc(375px - 20px);
+    background-color: #fff;
+    color: #333333;
+    font-family: PingFangSC-Thin;
+    &__label {
+        font-size: 26px;
+        letter-spacing: 0.31px;
+    }
+    &__list {
+        display: flex;
+        flex-direction: column;
+        font-size: 14px;
+        letter-spacing: 0.17px;
+    }
+    &__question {
+        padding: 10px 0;
+    }
+    &__bottom {
+        position: relative;
+        left: -20px;
+        margin-top: 17px;
+        width: calc(100% - 40px);
+        padding: 20px 30px;
+        background: #272530;
+    }
+    &__button {
+        width: 313px;
+        height: 44px;
+        line-height: 44px;
+        font-family: PingFangSC-Light;
+        font-size: 18px;
+        color: #FFFFFF;
+        letter-spacing: 0.22px;
+        text-align: center;
+        border: 1px solid #FFFFFF;
+        background: #272530;
+    }
+    &__button:active {
+        background: #1f1e24;
+    }
+}

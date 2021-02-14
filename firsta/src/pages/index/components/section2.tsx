@@ -1,6 +1,6 @@
 import React, { } from 'react'
 import { View, Text, Image } from '@tarojs/components'
-import Star from '../../../component/star'
+import Star from '../../../component/star/star'
 import './section2.scss'
 function Section2() {
     return <View className='section2'>
