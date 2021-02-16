@@ -29,6 +29,8 @@ function Index() {
       </Child>
       <Button onClick={navButtonClick}>navigateTo</Button>
       <Button onClick={redirectButtonClick}>redirectTo</Button>
+      <Button onClick={()=>navigateTo({url:"/pages/list/index"})}>List</Button>
+      <Button onClick={()=>navigateTo({url:'/pages/request/index'})}>request page</Button>
     </View>
   )
 }
