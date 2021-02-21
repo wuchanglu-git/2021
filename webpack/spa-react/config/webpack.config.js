@@ -2,13 +2,15 @@ const path = require("path");
 //引入插件cleanwebpackplugin清除之前的dist文件
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const BASEPATH=path.resolve(__dirname,'../')
+
 module.exports = {
   entry: {
-    main: path.join(__dirname, "src/index.js"),
+    main: path.join(BASEPATH, "src/index.js"),
   },
   output: {
     //输出目录
-    path: path.join(__dirname, "dist"),
+    path: path.join(BASEPATH, "dist"),
     //文件名称
     filename: "bundle.js",
   },
@@ -16,14 +18,14 @@ module.exports = {
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       filename: "index.html", //最终创建的文件名
-      template: path.join(__dirname, "src/index.html"), //指定模板路径
+      template: path.join(BASEPATH, "src/index.html"), //指定模板路径
     }),
   ],
   module: {
     rules: [
       {
         test: /\.(jsx|js)$/,
-        include: path.resolve(__dirname, "./src"),
+        include: path.resolve(BASEPATH, "./src"),
         exclude: /node_modules/,
         use: "babel-loader",
       },
