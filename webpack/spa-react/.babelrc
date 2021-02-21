@@ -2,16 +2,9 @@
   "presets": [
     [
       "@babel/preset-env",
-      {
-        "modules": false,
-        "targets": {
-          "browsers": ["ie >=9"]
-        },
-        "useBuiltIns": true,
-        "debug": true
-      },
-      "@babel/preset-react"
-    ]
+      { "useBuiltIns": "usage" }
+    ],
+    "@babel/preset-react"
   ],
   "plugins": ["@babel/plugin-transform-runtime"]
 }
