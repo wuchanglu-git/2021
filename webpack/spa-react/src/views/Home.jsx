@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from "react";
-import testPic from "../statics/images/test.jpg";
+import testPic from "@/statics/images/test.jpg";
 import "./Home.less";
 export function Home() {
   const [count, setCount] = useState(0);
