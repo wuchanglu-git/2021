@@ -38,6 +38,16 @@ module.exports = {
           "less-loader", //编译less
         ],
       },
+      {
+        test: /\.(png|jpg|jpeg|gif|svg|webp)/,
+        use: {
+          loader: "url-loader",
+          options: {
+            outputPath: "images", //图片输出的路径
+            limit: 10 * 1024,
+          },
+        },
+      },
     ],
   },
 };
