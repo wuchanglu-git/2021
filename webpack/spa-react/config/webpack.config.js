@@ -2,7 +2,7 @@ const path = require("path");
 //引入插件cleanwebpackplugin清除之前的dist文件
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const BASEPATH=path.resolve(__dirname,'../')
+const BASEPATH = path.resolve(__dirname, "../");
 
 module.exports = {
   entry: {
@@ -28,6 +28,14 @@ module.exports = {
         include: path.resolve(BASEPATH, "./src"),
         exclude: /node_modules/,
         use: "babel-loader",
+      },
+      {
+        test: /\.less/,
+        use: [
+          "style-loader", //创建style标签，并将css添加进去
+          "css-loader", //编译css
+          "less-loader", //编译less
+        ],
       },
     ],
   },
