@@ -34,6 +34,7 @@ module.exports = {
         use: [
           "style-loader", //创建style标签，并将css添加进去
           "css-loader", //编译css
+          "postcss-loader", //将被less编译出来的css通过postcss处理
           "less-loader", //编译less
         ],
       },
