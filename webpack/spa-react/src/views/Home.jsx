@@ -8,7 +8,7 @@ export function Home() {
     <div>
       Home
       <br></br>
-      <h1>-{count}-</h1>
+      <h1>--{count}-</h1>
       <button onClick={clickHandle}>点我增加</button>
     </div>
   );

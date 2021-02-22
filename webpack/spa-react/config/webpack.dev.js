@@ -1,7 +1,9 @@
+const { merge } = require("webpack-merge");
 const path = require("path");
 const baseConfig = require("./webpack.config");
 const BASEPATH = path.resolve(__dirname, "../");
-module.exports = Object.assign(baseConfig, {
+const webpack = require("webpack");
+module.exports = merge(baseConfig, {
   mode: "development",
   devtool: "source-map",
   devServer: {
@@ -15,4 +17,5 @@ module.exports = Object.assign(baseConfig, {
       "/api": "http://localhost:3000",
     },
   },
+  plugins: [new webpack.HotModuleReplacementPlugin()],
 });
