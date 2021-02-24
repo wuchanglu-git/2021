@@ -3,7 +3,7 @@ const path = require("path");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const BASEPATH = path.resolve(__dirname, "../");
-
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 module.exports = {
   entry: {
     main: path.join(BASEPATH, "src/index.js"),
@@ -13,12 +13,17 @@ module.exports = {
     path: path.join(BASEPATH, "dist"),
     //文件名称
     filename: "bundle.js",
+    publicPath: "./",
   },
   plugins: [
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       filename: "index.html", //最终创建的文件名
       template: path.join(BASEPATH, "src/index.html"), //指定模板路径
+    }),
+    new MiniCssExtractPlugin({
+      filename: "[name].css",
+      chunkFilename: "[id].css",
     }),
   ],
   module: {
@@ -32,7 +37,8 @@ module.exports = {
       {
         test: /\.less/,
         use: [
-          "style-loader", //创建style标签，并将css添加进去
+          // "style-loader", // b不再需要style-loader要已经分离处理
+          MiniCssExtractPlugin.loader,
           "css-loader", //编译css
           "postcss-loader", //将被less编译出来的css通过postcss处理
           "less-loader", //编译less
