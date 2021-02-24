@@ -87,5 +87,6 @@ module.exports = {
       minSize: 1024,
       minChunks: 5,
     },
+    usedExports: false,
   },
 };
