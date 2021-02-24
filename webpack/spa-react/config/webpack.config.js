@@ -4,6 +4,7 @@ const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const BASEPATH = path.resolve(__dirname, "../");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const { ProvidePlugin } = require("webpack");
 module.exports = {
   entry: {
     main: path.join(BASEPATH, "src/index.js"),
@@ -13,6 +14,7 @@ module.exports = {
     path: path.join(BASEPATH, "dist"),
     //文件名称
     filename: "[name]-bundle.js",
+    // 设置了publicPath之后，devserver的publicPath也得做设置
     publicPath: "./",
   },
   plugins: [
@@ -24,6 +26,9 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: "[name].css",
       chunkFilename: "[id].css",
+    }),
+    new ProvidePlugin({
+      $moment: "moment",
     }),
   ],
   module: {
@@ -40,7 +45,7 @@ module.exports = {
           // "style-loader", // b不再需要style-loader要已经分离处理
           MiniCssExtractPlugin.loader,
           "css-loader", //编译css
-          "postcss-loader", //将被less编译出来的css通过postcss处理
+          //"postcss-loader", //将被less编译出来的css通过postcss处理
           "less-loader", //编译less
         ],
       },

@@ -1,5 +1,8 @@
 const baseConfig = require("./webpack.config");
-module.exports = Object.assign(baseConfig, {
+const { merge } = require("webpack-merge");
+module.exports = merge(baseConfig, {
   mode: "production",
   devtool: false,
+  output: {},
+  plugins: [],
 });

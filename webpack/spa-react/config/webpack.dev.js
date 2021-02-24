@@ -16,6 +16,8 @@ module.exports = merge(baseConfig, {
       // 代理到后端的服务地址，会拦截所有以api开头的请求地址
       "/api": "http://localhost:3000",
     },
+    // 此路径下的打包文件可在浏览器中访问
+    publicPath: "/",
   },
   plugins: [new webpack.HotModuleReplacementPlugin()],
 });
