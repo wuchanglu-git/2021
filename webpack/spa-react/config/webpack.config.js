@@ -12,7 +12,7 @@ module.exports = {
     //输出目录
     path: path.join(BASEPATH, "dist"),
     //文件名称
-    filename: "bundle.js",
+    filename: "[name]-bundle.js",
     publicPath: "./",
   },
   plugins: [
@@ -74,6 +74,13 @@ module.exports = {
     extensions: [".js", ".jsx"],
     alias: {
       "@": path.join(BASEPATH, "src"),
+    },
+  },
+  optimization: {
+    splitChunks: {
+      chunks: "all",
+      minSize: 1024,
+      minChunks: 5,
     },
   },
 };
