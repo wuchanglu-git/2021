@@ -1,0 +1,28 @@
+@import '../../app.scss';
+.me{
+    text-align: center;
+}
+.header{
+    padding-top: 100px;
+    padding-bottom: 50px;
+    background-image: linear-gradient(to right,$primary,$primary-deep);
+    &__avator{
+        width: 150px;
+        height: 150px;
+        background-color: $bg-color;
+        border-radius: 50%;
+        border: 6px solid $white;
+    }
+    &__login-btn{
+        font-size: 40px;
+        font-weight: 600;
+        color: $success;
+    }
+    &__login-btn:active{
+        opacity: 0.8;
+    }
+}
+.main{
+    padding: 50px 0;
+    text-align: start;
+}

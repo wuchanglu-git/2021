@@ -1,1 +1,14 @@
 @import '~taro-ui/dist/style/index.scss';
+$danger:#FF4949;
+$bg-color:#f4f5f5;
+$white:#fff;
+$primary:#6190E8;
+$primary-deep:#3e1ac2;
+$success:#5cbb7a;
+.button-danger-secondary{
+    border-color: $danger;
+    color: $danger;
+}
+#app{
+    background-color: $bg-color;
+}

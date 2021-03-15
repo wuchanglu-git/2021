@@ -1,7 +1,7 @@
 const pages=[
     'pages/index/index',
+    'pages/list/index',
     'pages/me/index',
-    'pages/list/index'
   ]
 export default {
   pages ,
@@ -13,11 +13,11 @@ export default {
       },
       {
         pagePath:pages[1],
-        text:'我的'
+        text:'列表'
       },
       {
         pagePath:pages[2],
-        text:'列表'
+        text:'我的'
       }
     ]
   },
