@@ -1,0 +1,35 @@
+@import '../../app.scss';
+.login{
+    padding: 200px 0 100px 0;
+    text-align: center;
+}
+.avator{
+    width: 200px;
+    height: 200px;
+    border: 6px solid $white;
+    border-radius: 100%;
+}
+.form{
+    text-align: start;
+    padding: 100px 50px 0 50px;
+    &__input{
+        display: flex;
+        align-items: center;
+        height: 100px;
+        background-color: $white;
+        padding: 0 40px;
+        box-sizing: border-box;
+        font-size: 40px;
+    }
+    &__input,&__button{
+        margin-top: 50px;
+        border-radius: 100px;
+    }
+}
+.registe-link{
+    margin-top: 20px;
+    padding:0 50px;
+    text-decoration: underline;
+    font-size: 30px;
+    color: rgb(107, 1, 107);
+}

@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { View, Text, Image } from '@tarojs/components'
 import { AtButton, AtList, AtListItem } from 'taro-ui'
-import  './index.scss'
+import { navigateTo } from '@tarojs/taro'
+import './index.scss'
 import { NavListValues, NavItem, PropsValues, StateValues } from './types'
 
 const NAV_LIST: NavListValues = [
@@ -25,14 +26,19 @@ export default class Me extends Component<PropsValues, StateValues> {
   componentDidShow() { }
 
   componentDidHide() { }
-
+  linkToLogin=() => {
+    navigateTo({
+      url:'/pages/login/index'
+    })
+  }
   render() {
     const { navList } = this.state
+    const { linkToLogin } = this
     return (
       <View className='me'>
         <View className='header'>
-          <Image className='header__avator' src=''/>
-          <View className='header__login-btn'>点击登录</View>
+          <Image className='header__avator' src='' />
+          <View className='header__login-btn' onClick={linkToLogin}>点击登录</View>
         </View>
         <View className='main'>
           <AtList>
