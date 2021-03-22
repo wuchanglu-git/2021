@@ -1,0 +1,20 @@
+@import '../../app.scss';
+.vcode-btn{
+    font-size: 24px;
+    color: $primary;
+    padding-left: 30px;
+}
+.avator{
+    margin: 100px calc(375px - 100px);
+    width: 200px;
+    height: 200px;
+    border:10px solid $white;
+    border-radius: 50%;
+}
+.avator__wrapper{
+    background-color: $bg-color;
+}
+.submit-btn{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}

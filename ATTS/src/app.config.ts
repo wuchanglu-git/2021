@@ -2,7 +2,8 @@ const pages=[
     'pages/index/index',
     'pages/list/index',
     'pages/me/index',
-    'pages/login/index'
+    'pages/login/index',
+    'pages/registe/index'
   ]
 export default {
   pages ,

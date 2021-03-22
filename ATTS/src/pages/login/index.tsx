@@ -7,7 +7,7 @@ type PropsValues = {}
 type StateValues = {
   account: string,
   password: string,
-  [key:string]:string
+  [key: string]: string
 }
 export default class Login extends Component<PropsValues, StateValues> {
 
@@ -32,19 +32,26 @@ export default class Login extends Component<PropsValues, StateValues> {
       [key]: e.detail.value as string
     })
   }
-  submitClickHandle=()=>{
+  submitClickHandle = () => {
     console.log(this.state)
   }
+  resetClickHandle = () => {
+    this.setState({
+      account: '',
+      password: ''
+    })
+  }
   render() {
-    const { linkToRegiste, inputHandle,submitClickHandle } = this
+    const { linkToRegiste, inputHandle, submitClickHandle, resetClickHandle } = this
+    const { password, account } = this.state
     return (
       <View className='login'>
         <Image className='avator' src='' />
         <View className='form'>
-          <Input type='number' className='form__input' placeholder='请输入账号：手机号' name='account' onInput={($event) => { inputHandle($event, 'account') }}></Input>
-          <Input className='form__input' placeholder='请输入密码' name='password' password onInput={($event) => { inputHandle($event, 'password') }}></Input>
+          <Input type='number' className='form__input' placeholder='请输入账号：手机号' name='account' value={account} onInput={($event) => { inputHandle($event, 'account') }}></Input>
+          <Input className='form__input' placeholder='请输入密码' name='password' password value={password} onInput={($event) => { inputHandle($event, 'password') }}></Input>
           <AtButton className='form__button' formType='submit' type='primary' onClick={submitClickHandle}>提交</AtButton>
-          <AtButton className='form__button' formType='reset'>重置</AtButton>
+          <AtButton className='form__button' formType='reset' onClick={resetClickHandle}>重置</AtButton>
         </View>
         <View className='registe-link' onClick={linkToRegiste}>没有账号？立即注册！</View>
       </View>
