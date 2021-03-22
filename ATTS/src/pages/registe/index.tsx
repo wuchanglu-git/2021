@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import { View, Text, Image } from '@tarojs/components'
-import { AtForm, AtInput, AtButton, AtImagePicker } from 'taro-ui'
+import { View, Image } from '@tarojs/components'
+import { AtForm, AtInput, AtButton } from 'taro-ui'
 import './index.scss'
 type File = {
   url: ""
@@ -12,14 +12,6 @@ interface StateValues {
   nickName: string,
   avator: string,
   files: File[],
-}
-enum Keys {
-  account = 'account',
-  password = 'password',
-  vcode = 'vcode',
-  nickName = 'nickName',
-  avator = 'avator',
-  files = 'files'
 }
 interface PropsValues { }
 const DEFAULT_STATE = {
@@ -49,14 +41,14 @@ export default class Registe extends Component<PropsValues, StateValues> {
       [key]: value
     } as StateValues)
   }
-  onSubmit(event) {
+  onSubmit() {
     console.log(this.state)
   }
-  onReset(event) {
+  onReset() {
   }
   render() {
     const { onSubmit, onReset, handleChange } = this
-    const { password, account, vcode, nickName, avator } = this.state
+    const { password, account, vcode, nickName } = this.state
     return (
       <AtForm onSubmit={onSubmit} onReset={onReset}>
         <View className='avator__wrapper'>

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { View, Image, Input } from '@tarojs/components'
 import { AtButton } from 'taro-ui'
-import { navigateTo, vibrateLong } from '@tarojs/taro'
+import { navigateTo } from '@tarojs/taro'
 import './index.scss'
 type PropsValues = {}
 type StateValues = {
