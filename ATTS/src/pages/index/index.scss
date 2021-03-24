@@ -1,0 +1,48 @@
+@import '../../app.scss';
+.user{
+    display: flex;
+    align-items: center;
+    padding: 50px;
+    background-image: linear-gradient($success,$primary);
+    color: $white;
+    &__avator{
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+    }
+    &__message{
+        display: flex;
+        flex-direction: column;
+        margin-left: 30px;
+    }
+    &__name{
+        font-size: 50px;
+    }
+    &__account{
+        font-size: 35px;
+    }
+    &__tip{
+        font-size: 30px;
+    }
+}
+.section{
+    background-color: $white;
+    .title{
+        padding: 20px;
+        font-size: 60px;
+        color: $primary;
+    }
+    .content{
+        padding: 20px;
+    }
+}
+.bar-chart{
+}
+[canvas-id=bar-canvas]{
+    width: 710px;
+    height: 710px;
+}
+[canvas-id=pie-canvas]{
+    width: 710px;
+    height: 710px;
+}

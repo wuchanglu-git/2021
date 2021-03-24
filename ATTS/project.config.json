@@ -2,7 +2,7 @@
   "miniprogramRoot": "dist/",
   "projectname": "ATTS",
   "description": "ATTS分析用掉的时间",
-  "appid": "touristappid",
+  "appid": "wx937220b109336555",
   "setting": {
     "urlCheck": true,
     "es6": false,
