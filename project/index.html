@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=\, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1,user-scalable=no, minimal-ui, shrink-to-fit=no, viewport-fit=cover">
+    <title>Document</title>
+    <link rel="stylesheet" href="./style.css" />
+    <!-- 引入 ECharts 文件 -->
+    <script src="./assets//echarts.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+              !(function(win, doc) {
+          function setFontSize() {
+              // 获取window 宽度
+              var winWidth = window.innerWidth;
+                  //这里是假设在750px宽度设计稿的情况下
+                  //可以根据实际需要修改
+              doc.documentElement.style.fontSize = (winWidth / 391) * 100 + 'px';
+          }
+          // onorientationchange 屏幕旋转事件
+          var evt = 'onorientationchange' in win ? 'orientationchange' : 'resize';
+          var timer = null;
+          win.addEventListener(evt, function() {
+              clearTimeout(timer);
+
+              timer = setTimeout(setFontSize, 300);
+          }, false);
+          win.addEventListener("pageshow", function(e) {
+              if (e.persisted) {
+                  clearTimeout(timer);
+
+                  timer = setTimeout(setFontSize, 300);
+              }
+          }, false);
+          //初始化
+          setFontSize();
+      }(window, document));
+    </script>
+  </head>
+  <body>
+    <div id="app">
+      <div class="header">
+        <img src="./assets/header.png" alt="" />
+        <div class="header__label text-size-10">报告生成时间:</div>
+        <div class="header__time text-size-12">2021年3月29日</div>
+      </div>
+      <div class="firm">
+        <div class="firm__wrapper firm__first">
+          <div class="firm__block" v-for="item in data1" :key="item.name">
+            <p class="firm__block-f text-size-12">{{item.name}}</p>
+            <p class="firm__block-s text-size-14"><span class="blue">{{item.num}}</span>家</p>
+          </div>
+        </div>
+        <div class="firm__wrapper  firm__second">
+          <div class="firm__block" v-for="item in data2" :key="item.name">
+            <p class="firm__block-f text-size-12">{{item.name}}</p>
+            <p class="firm__block-s text-size-14"><span class="blue text-size-18">{{item.num}}</span>家</p>
+          </div>
+        </div>
+        <div class="firm__introduce text-size-14">
+          目前系统通过数据监测预警共 <span class="blue">65</span>
+          家，系统参考工商总局预警数，建立企业风险预警模型，对监测企业进行评分监测。
+        </div>
+      </div>
+      <div class="chart">
+          <p class="chart__title text-size-16">标题</p>
+          <div id="chart1" style="width:3.91rem;height:2.82rem"></div>
+          <ul class="chart__tabs text-size-14">
+            <li v-for="item in tabs1" :key="item.name">
+                {{item.name}}
+            </li>
+          </ul>
+          <ul class="chart__data">
+              <li class="chart__cell" v-for="item in chartdata1" :key="item.name">
+                <div class="cell__left">
+                    <div class="c-l-color" :style="{backgroundColor:item.color}"></div>
+                    <div class="c-l-name">{{item.name}}</div>
+                </div>
+                <div class="cell__right">
+                    <div class="c-r-num">{{item.num}}</div>
+                    <div class="c-r-percent">
+                        <p class="c-r-p1">{{item.percent[0]}}</p>
+                        <p class="c-r-p2">.{{item.percent[1]}}%</p>
+                    </div>
+                </div>
+              </li>
+          </ul>
+      </div>
+      <div class="chart">
+        <p class="chart__title text-size-16">预警统计</p>
+        <div id="chart2" style="width:3.7rem;height:2.82rem"></div>
+        <ul class="chart__tabs text-size-14">
+        <ul class="chart__data" style="width:3.2rem">
+            <li class="chart__cell">
+                <div class="cell__left">
+                </div>
+                <div class="cell__right" >
+                    <div class="c-r-num text-size-12" style="margin-right:0;padding-right:0;width:0.42rem;text-align: center;border: none;">今日</div>
+                    <div class="c-r-percent">
+                        <p class="c-r-p1 text-size-12" style="padding-right:0;width:0.42rem;text-align: center;">总量</p>
+                    </div>
+                </div>
+              </li>
+            <li class="chart__cell" v-for="item in chartdata2" :key="item.name">
+              <div class="cell__left">
+                  <div class="c-l-color-circle" :style="{borderColor:item.color}"></div>
+                  <div class="c-l-name">{{item.name}}</div>
+              </div>
+              <div class="cell__right" >
+                  <div class="c-r-num" style="margin-right:0;padding-right:0;width:0.42rem;text-align: center;">{{item.today}}</div>
+                  <div class="c-r-percent">
+                      <p class="c-r-p1" style="padding-right:0;width:0.42rem;text-align: center;">{{item.count}}</p>
+                  </div>
+              </div>
+            </li>
+        </ul>
+      </div>
+      <div class="search">
+          <div class="search__header">
+              <p class="title text-size-16">标题</p>
+              <div class="search__input">
+                  <input type="text" placeholder="输入关键字">
+                  <div class="search__button">查询</div>
+                  <img src="./assets/search.png" alt="">
+              </div>
+          </div>
+          <div class="serach__list">
+              <div class="list__item" v-for="item in searchList" :key="item">
+                  <div class="list__top">
+                      <p style="width: 2.7rem;" class="t-o-e">贵州海科实业发展有限公司贵州海科实…</p>
+                      <p style="margin-left: 0.15rem;
+                      background: #F1F7FF;
+                      border: 1px solid #91BEFF;
+                      border-radius: 4px;
+                      padding: 0.02rem 0.05rem;" class="text-size-12 blue">暂无风险</p>
+                  </div>
+                  <div class="list__middle text-size-12">
+                      <p style="width: 0.72rem;">是否规上</p>
+                      <p style="width: 2.15rem;">企业分类</p>
+                      <p>模型评分</p>
+                  </div>
+                  <div class="list__bottom text-size-12">
+                    <p>是</p>
+                    <p style="width: 2.15rem;" class="t-o-e">批发和零售业批发和零售业批发和零售…</p>
+                    <p class="text-size-16 blue">74.21</p>
+                  </div>
+              </div>
+          </div>
+          <p class="search__more blue text-size-14">展开更多</p>
+      </div>
+      <div class="companey">
+        <div class="companey__title"><p>标题</p></div>
+        <div class="companey__message">
+            <p class="text-size-18">贵州海科实业发展有限公司</p>
+            <div class="text-size-12" style="margin-top:0.34rem;display: flex;align-items: center;">
+                <p class="message__block">
+                    企业变更指标
+                    <span style="margin-left: 0.05rem;" class="blue text-size-14">9</span>
+                </p>
+                <p class="message__block">
+                    负向指标
+                    <span style="margin-left: 0.05rem;" class="blue text-size-14">0</span>
+                </p>
+            </div>
+            <div class="text-size-12" style="padding-bottom:0.1rem;margin-top:0.25rem;display: flex;align-items: center;">
+                <p class="message__block">
+                    经营状态指标
+                    <span style="margin-left: 0.05rem;" class="blue text-size-14">4</span>
+                </p>
+                <p class="message__block">
+                    经营活动指标
+                    <span style="margin-left: 0.05rem;" class="blue text-size-14">2</span>
+                </p>
+            </div> 
+            <img class="message__ball" src="./assets//ball.png" alt="">
+        </div>
+        <div class="companey__status text-size-14">
+            <div class="status__list">
+                <p class="s-list__label">经营状态</p>
+                <p class="s-list__text">开业</p>
+            </div>
+            <div class="status__list">
+                <p class="s-list__label">注册时间</p>
+                <p class="s-list__text">1996-11-22</p>
+            </div>
+            <div class="status__list">
+                <p class="s-list__label">企业通讯地址</p>
+                <p class="s-list__text">贵州省贵阳市白云区某某某某莫某某某某路某某号</p>
+            </div>
+            <div class="status__list">
+                <p class="s-list__label">企业联系电话</p>
+                <p class="s-list__text">文本</p>
+            </div>
+            <div class="status__list">
+                <p class="s-list__label">电子邮箱</p>
+                <p class="s-list__text">文本</p>
+            </div>
+            <div class="status__list">
+                <p class="s-list__label">从业人数</p>
+                <p class="s-list__text">企业选择不公示</p>
+            </div>
+            <div class="status__list">
+                <p class="s-list__label">营业期限</p>
+                <p class="s-list__text">1996-11-22 00:00:00</p>
+            </div>
+            <div class="status__list">
+                <p class="s-list__label">标题6字内</p>
+                <p class="s-list__text">文本文本</p>
+            </div>
+            <div class="status__list">
+                <p class="s-list__label">标题长过6字后则需折行</p>
+                <p class="s-list__text">文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本</p>
+            </div>
+        </div>
+      </div>
+      <div class="section">
+          <div class="section__nav">
+              <p class="section-nav-i blue">企业主要人员</p>
+              <p class="section-nav-i">企业股权出质</p>
+              <p class="section-nav-i">企业许可信息</p>
+              <p class="section-nav-i">更多<img src="./assets/jt.png" alt="">
+              </p>
+          </div>
+          <div class="section-wrapper">
+              <p class="section__label-check">企业主要人员</p>
+              <p class="section__label">企业股权出质</p>
+              <p class="section__label">企业许可信息</p>
+              <p class="section__label">行政处罚信息</p>
+              <p class="section__label">投资人信息</p>
+              <p class="section__label">分支机构信息</p>
+              <p class="section__label">企业变更信息</p>
+              <p class="section__label">商标信息</p>
+              <p class="section__label">企业清算信息</p>
+              <p class="section__label">设计略...</p>
+          </div>
+      </div>
+      <div class="member">
+              <div class="member__block" v-for="item in members" :key="item">
+                  <div class="member__cell">
+                    <p>序号</p>
+                    <p>{{item}}</p>
+                  </div>
+                  <div class="member__cell">
+                    <p>姓名</p>
+                    <p>李纯萍</p>
+                  </div>
+                  <div class="member__cell">
+                    <p>电话</p>
+                    <p>181*******8</p>
+                  </div>
+                  <div class="member__cell">
+                    <p>地址</p>
+                    <p>李纯萍</p>
+                  </div>
+                  <div class="member__cell">
+                    <p>职务</p>
+                    <p>监事</p>
+                  </div>
+              </div>
+      </div>
+      <div class="chart">
+        <p class="chart__title text-size-16">企业变更象限</p>
+        <div id="chart3" style="width:3.91rem;height:2.82rem"></div>
+        <ul class="chart__data" style="width:100%;box-sizing:border-box">
+            <li class="chart__cell" v-for="item in chartdata3" :key="item.name">
+              <div class="cell__left">
+                  <div class="c-l-color" :style="{backgroundColor:item.color}"></div>
+                  <div class="c-l-name">{{item.name}}</div>
+              </div>
+              <div class="cell__right">
+                  <div class="c-r-num">{{item.num}}</div>
+                  <div class="c-r-percent">
+                      <p class="c-r-p1">{{item.percent[0]}}</p>
+                      <p class="c-r-p2">.{{item.percent[1]}}%</p>
+                  </div>
+              </div>
+            </li>
+        </ul>
+      </div>
+      <div class="chart">
+        <p class="chart__title text-size-16">总体变更趋势</p>
+        <div id="chart4" style="width:3.7rem;height:2.82rem"></div>
+      </div>
+    </div>
+    <script src="./index.js"></script>
+  </body>
+</html>
