@@ -1,12 +1,17 @@
 import { GlobalStyle } from './style'
-import SearchSvg from './assets/icon/search.svg'
+import { renderRoutes } from 'react-router-config'
+import routes from './routes'
+import { HashRouter } from 'react-router-dom'
+import { Provider } from 'react-redux'
+import store from './store'
 function App() {
   return (
-    <div className="App">
-      <GlobalStyle></GlobalStyle>
-      page
-      <img src={SearchSvg} alt=""/>
-    </div>
+    <Provider store={store}>
+      <HashRouter>
+        <GlobalStyle></GlobalStyle>
+        {renderRoutes(routes)}
+      </HashRouter>
+    </Provider>
   );
 }
 
