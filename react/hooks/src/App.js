@@ -6,6 +6,7 @@ import ErrorCom from './components/error'
 import EffectHook from './components/effectHook'
 import MyHook from './components/myHook'
 import HookContext from './components/hookContext'
+import TestKey from './components/testKey'
 function App() {
   return (
     <div className="App">
@@ -14,8 +15,9 @@ function App() {
       {false && <Context />}
       {false && <ErrorCom />}
       {false && <EffectHook />}
-      {true&& <MyHook/>}
-      {false &&<HookContext/>}
+      {false && <MyHook />}
+      {false && <HookContext />}
+      {true && <TestKey />}
     </div>
   );
 }
