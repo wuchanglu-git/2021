@@ -12,6 +12,10 @@ export const changeRecommendList = (data: Array<any>) => ({
   type: actionTypes.CHANGE_RECOMMEND_LIST,
   data: fromJS(data),
 });
+export const changeLoading = (data: boolean) => ({
+  type: actionTypes.CHANGE_ENTER_LOADING,
+  data: fromJS(data),
+});
 export const getBannerList = () => {
   return (dispatch: (arg0: { type: string; data: any }) => void) => {
     getBannerRequest()
@@ -28,6 +32,10 @@ export const getRecommendList = () => {
     getRecommendListRequest()
       .then((data: any) => {
         dispatch(changeRecommendList(data.result));
+        // 接口反应有点快，加个延迟好看到loading效果
+        setTimeout(() => {
+            dispatch(changeLoading(false))
+        }, 500);
       })
       .catch(() => {
         console.log("推荐歌单数据传输错误");

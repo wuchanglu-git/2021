@@ -5,9 +5,9 @@ type PropsValues = {
     direction?: 'vertical' | 'horizental' // 滚动的方向
     click?: true // 是否支持点击
     refresh?: boolean// 是否刷新
-    onScroll?: (scroll: any) => {} // 滑动触发的回调函数
-    pullUp?: () => {}// 上拉加载逻辑
-    pullDown?: () => {}// 下拉加载逻辑
+    onScroll?: (scroll: any) => void // 滑动触发的回调函数
+    pullUp?: () => void// 上拉加载逻辑
+    pullDown?: () => void// 下拉加载逻辑
     pullUpLoading?: boolean// 是否显示上拉 loading 动画
     pullDownLoading?: boolean// 是否显示下拉 loading 动画
     bounceTop?: boolean// 是否支持向上吸顶
@@ -79,7 +79,7 @@ const Scroll = forwardRef((props: PropsValues, ref: ForwardedRef<HTMLDivElement>
             bScroll.off('touchEnd');
         }
     }, [pullDown, bScroll]);
-    useEffect(()=>{},[pullDownLoading, pullUpLoading])
+    useEffect(() => { }, [pullDownLoading, pullUpLoading])
     // 一般和 forwardRef 一起使用，ref 已经在 forWardRef 中默认传入
     useImperativeHandle(ref, () => ({
         // 给外界暴露 refresh 方法
