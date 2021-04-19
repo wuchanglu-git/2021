@@ -4,3 +4,6 @@ export const ScrollContainer = styled.div`
   height: 100%;
   overflow: hidden;
 `;
+
+export const PullUpLoading = styled.div``
+export const PullDownLoading = styled.div``

@@ -4,6 +4,7 @@ import { categoryTypes, alphaTypes } from '../../api/config'
 import { CATEGORY_TYPES } from './types'
 import { List, ListContainer, ListItem, NavContainer } from './style'
 import Scroll from '../../components/Scroll';
+import Loading from '../../components/Loading'
 import {
     getSingerList,
     getHotSingerList,
@@ -15,14 +16,8 @@ import {
     refreshMoreHotSingerList
 } from './store/actionCreator'
 import { connect } from 'react-redux'
-//mock 数据
-const singerList = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map(item => {
-    return {
-        picUrl: "https://p2.music.126.net/uTwOm8AEFFX_BYHvfvFcmQ==/109951164232057952.jpg",
-        name: "隔壁老樊",
-        accountId: 277313426,
-    }
-});
+import LazyLoad, { forceCheck } from 'react-lazyload'
+import MusicSvg from '../../assets/icon/music.svg'
 type SingerTypes = {
     picUrl: string,
     name: string,
@@ -35,7 +30,9 @@ const renderSingerList = (singerList: Array<SingerTypes>) => {
                 singerList.map((item, index) => {
                     return (<ListItem key={index}>
                         <div className="img_wrapper">
-                            <img src={`${item.picUrl}?param=300x300`} width="100%" height="100%" alt="music" />
+                            <LazyLoad placeholder={<img width="100%" height="100%" src={MusicSvg} alt="music" />}>
+                                <img src={`${item.picUrl}?param=300x300`} width="100%" height="100%" alt="music" />
+                            </LazyLoad>
                         </div>
                         <span className="name">{item.name}</span>
                     </ListItem>)
@@ -117,6 +114,13 @@ export const Singers = connect(mapStateToProps, mapDispatchToProps)(
         useEffect(() => {
             getHotSingerDispatch()
         }, [])
+        const handlePullUp = () => {
+            pullUpRefreshDispatch(category, alpha, category.key === '', pageCount);
+        };
+
+        const handlePullDown = () => {
+            pullDownRefreshDispatch(category, alpha);
+        };
         return (
             <div>
                 <NavContainer>
@@ -132,9 +136,14 @@ export const Singers = connect(mapStateToProps, mapDispatchToProps)(
                         oldVal={alpha}></HorizenItem>
                 </NavContainer>
                 <ListContainer>
-                    <Scroll >
+                    <Scroll pullUpLoading={pullUpLoading}
+                        pullDownLoading={pullDownLoading}
+                        pullUp={handlePullUp}
+                        pullDown={handlePullDown}
+                        onScroll={forceCheck}>
                         {renderSingerList(singerListJS)}
                     </Scroll>
+                    {enterLoading && <Loading></Loading>}
                 </ListContainer>
             </div>
         )

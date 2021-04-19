@@ -1,6 +1,8 @@
 import React, { forwardRef, useState, useRef, useEffect, ForwardedRef, useImperativeHandle } from 'react'
 import BScroll from 'better-scroll'
-import { ScrollContainer } from './style'
+import { PullDownLoading, PullUpLoading, ScrollContainer } from './style'
+import LoadingV2 from '../../components/Loading-v2'
+import Loading from '../Loading'
 type PropsValues = {
     direction?: 'vertical' | 'horizental' // 滚动的方向
     click?: true // 是否支持点击
@@ -96,9 +98,15 @@ const Scroll = forwardRef((props: PropsValues, ref: ForwardedRef<HTMLDivElement>
             }
         }
     }) as any);
+    const PullUpdisplayStyle = pullUpLoading ? { display: "" } : { display: "none" };
+    const PullDowndisplayStyle = pullDownLoading ? { display: "" } : { display: "none" };
     return (
         <ScrollContainer ref={scrollContaninerRef as any}>
             {props.children}
+            {/* 滑到底部加载动画 */}
+            <PullUpLoading style={PullUpdisplayStyle}><Loading></Loading></PullUpLoading>
+            {/* 顶部下拉刷新动画 */}
+            <PullDownLoading style={PullDowndisplayStyle}><LoadingV2></LoadingV2></PullDownLoading>
         </ScrollContainer>
     )
 })
