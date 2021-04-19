@@ -32,7 +32,7 @@ export const Recommend = connect(mapStateToProps, mapDispatchToProps)(
         useEffect(() => {
             if (!bannerList.size) { getBannerDataDispatch() }
             if (!recommendList.size) { getRecommendListDataDispatch() }
-        }, [getBannerDataDispatch, getRecommendListDataDispatch])
+        }, [getBannerDataDispatch, getRecommendListDataDispatch, bannerList.size, recommendList.size])
         const scrollHandle = useCallback(
             () => {
                 forceCheck()

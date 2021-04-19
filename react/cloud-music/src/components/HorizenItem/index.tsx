@@ -1,6 +1,6 @@
 
 
-import { memo, useRef, useEffect, ElementType } from "react"
+import { memo, useRef, useEffect } from "react"
 import Scroll from '../Scroll'
 import { ListItem, List } from './style'
 //list 为接受的列表数据

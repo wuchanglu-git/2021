@@ -9,11 +9,12 @@ export const getHotSingerListRequest = (count: number) => {
   return axiosInstance.get(`/top/artists?offset=${count}`);
 };
 export const getSingerListRequest = (
-  category: string,
+  category: { type: string; key: string },
   alpha: string,
   count: number
 ) => {
+  const { type = "", key = "" } = category;
   return axiosInstance.get(
-    `/artist/list?cat=${category}&initial=${alpha.toLowerCase()}&offset=${count}`
+    `/artist/list?${type}=${key}&initial=${alpha.toLowerCase()}&offset=${count}`
   );
 };
