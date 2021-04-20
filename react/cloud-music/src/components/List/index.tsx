@@ -14,9 +14,11 @@ type RecommendTYpe = {
 }
 type PropsValues = {
     recommendList: Array<RecommendTYpe>
+    clickHandle: (data: RecommendTYpe) => void
 }
 export default function RecommendList(props: PropsValues) {
     const { recommendList } = props
+    const { clickHandle } = props
     return (
         <ListWrapper>
             <h1 className="title">推荐歌单</h1>
@@ -24,7 +26,7 @@ export default function RecommendList(props: PropsValues) {
                 {
                     recommendList.map((item, index) => {
                         return (
-                            <ListItem key={item.id}>
+                            <ListItem key={item.id} onClick={() => clickHandle(item)}>
                                 <div className="img_wrapper">
                                     <div className="decorate"></div>
                                     {/* 加此参数可以减小请求的图片资源大小 */}

@@ -7,6 +7,7 @@ import { Content } from './style';
 import { connect } from "react-redux";
 import * as actionTypes from './store/actionCreator';
 import Loading from '../../components/Loading';
+import { renderRoutes } from 'react-router-config';
 const mapStateToProps = (state: { getIn: (arg0: string[]) => any; }) => ({
     bannerList: state.getIn(['recommend', 'bannerList']),
     recommendList: state.getIn(['recommend', 'recommendList']),
@@ -24,6 +25,7 @@ const mapDispatchToProps = (dispatch: any) => {
 }
 export const Recommend = connect(mapStateToProps, mapDispatchToProps)(
     React.memo(function Recommend(props: any) {
+        const {history} = props
         const { bannerList, recommendList, enterLoading } = props
         const { getBannerDataDispatch, getRecommendListDataDispatch } = props
         const scrollRef = useRef();
@@ -39,15 +41,23 @@ export const Recommend = connect(mapStateToProps, mapDispatchToProps)(
             },
             [],
         )
+        const clickHandle=useCallback(
+            (item: any)=>{
+                // console.log(item,history)
+                history.push(`/recommend/${item.id}`)
+            },
+            [history],
+        )
         return (
             <Content>
                 <Scroll ref={scrollRef as any} onScroll={scrollHandle}>
                     <div>
                         <Slider bannerList={bannerListJS}></Slider>
-                        <RecommendList recommendList={recommendListJS}></RecommendList>
+                        <RecommendList clickHandle={clickHandle} recommendList={recommendListJS}></RecommendList>
                     </div>
                 </Scroll>
                 {enterLoading && <Loading />}
+                {renderRoutes(props.route.routes)}
             </Content>
         )
     })

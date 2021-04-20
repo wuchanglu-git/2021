@@ -1,7 +1,7 @@
 // 路由配置文件
 import React from "react";
 import { Redirect } from "react-router-dom";
-import { Home, Recommend, Rank, Singers } from "../application";
+import { Home, Recommend, Rank, Singers, Album } from "../application";
 const config = [
   {
     path: "/",
@@ -17,7 +17,12 @@ const config = [
       {
         path: "/recommend",
         component: Recommend,
-        routes: []
+        routes: [
+          {
+            path: '/recommend/:id',
+            component: Album
+          }
+        ]
       },
       {
         path: "/singers",
