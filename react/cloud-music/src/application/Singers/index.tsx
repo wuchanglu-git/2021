@@ -110,9 +110,21 @@ export const Singers = connect(mapStateToProps, mapDispatchToProps)(
         }, [])
         useEffect(() => {
             updateDispatch(category, alpha)
+            return () => {
+                (alpha || category.key) && sessionStorage.setItem('singers_session', JSON.stringify({
+                    alpha, category
+                }))
+            }
         }, [category, alpha])
         useEffect(() => {
-            getHotSingerDispatch()
+            const session = sessionStorage.getItem('singers_session')
+            if (session) {
+                const { category, alpha } = JSON.parse(session)
+                setAlpha(alpha)
+                setCategory(category)
+            } else {
+                getHotSingerDispatch()
+            }
         }, [])
         const handlePullUp = () => {
             pullUpRefreshDispatch(category, alpha, category.key === '', pageCount);
@@ -149,3 +161,6 @@ export const Singers = connect(mapStateToProps, mapDispatchToProps)(
         )
     })
 )
+// 页面切换还留下category和alpha状态的方式我想到了两种
+// 1.存sessionstorage
+// 2.提取到redux上
