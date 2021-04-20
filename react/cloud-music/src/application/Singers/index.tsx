@@ -1,4 +1,4 @@
-import React, { useState, useCallback, memo, useEffect } from 'react'
+import { useState, useCallback, memo, useEffect, useContext } from 'react'
 import HorizenItem from '../../components/HorizenItem'
 import { categoryTypes, alphaTypes } from '../../api/config'
 import { CATEGORY_TYPES } from './types'
@@ -18,6 +18,7 @@ import {
 import { connect } from 'react-redux'
 import LazyLoad, { forceCheck } from 'react-lazyload'
 import MusicSvg from '../../assets/icon/music.svg'
+import { CategoryDataContext, CHANGE_ALPHA, CHANGE_CATEGORY } from './data'
 type SingerTypes = {
     picUrl: string,
     name: string,
@@ -97,32 +98,25 @@ export const Singers = connect(mapStateToProps, mapDispatchToProps)(
             pullDownRefreshDispatch
         } = props
         const singerListJS = singerList ? singerList.toJS() : []
-        const [category, setCategory] = useState({ name: '', key: '', type: 'type' })
+        const { data, dispatch } = useContext(CategoryDataContext) as any
+        const { category, alpha } = data.toJS()
+        // const [category, setCategory] = useState({ name: '', key: '', type: 'type' })
         const handleUpdateCatetory = useCallback((key) => {
             const cat = categoryTypes.find(item => {
                 return item.key === key
             })
-            if (cat) { setCategory(cat) }
-        }, [])
-        const [alpha, setAlpha] = useState('')
-        const handleUpdateAlpha = useCallback((val) => {
-            setAlpha(val)
-        }, [])
-        useEffect(() => {
-            updateDispatch(category, alpha)
-            return () => {
-                (alpha || category.key) && sessionStorage.setItem('singers_session', JSON.stringify({
-                    alpha, category
-                }))
+            if (cat) {
+                dispatch({ type: CHANGE_CATEGORY, data: cat })
+                updateDispatch(cat, alpha)
             }
-        }, [category, alpha])
+        }, [])
+        // const [alpha, setAlpha] = useState('')
+        const handleUpdateAlpha = useCallback((val) => {
+            dispatch({ type: CHANGE_ALPHA, data: val })
+            updateDispatch(category, val)
+        }, [])
         useEffect(() => {
-            const session = sessionStorage.getItem('singers_session')
-            if (session) {
-                const { category, alpha } = JSON.parse(session)
-                setAlpha(alpha)
-                setCategory(category)
-            } else {
+            if (!singerList.size) {
                 getHotSingerDispatch()
             }
         }, [])
