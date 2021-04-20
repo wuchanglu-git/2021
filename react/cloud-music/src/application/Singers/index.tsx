@@ -1,4 +1,4 @@
-import { useState, useCallback, memo, useEffect, useContext } from 'react'
+import { useCallback, memo, useEffect, useContext } from 'react'
 import HorizenItem from '../../components/HorizenItem'
 import { categoryTypes, alphaTypes } from '../../api/config'
 import { CATEGORY_TYPES } from './types'
@@ -100,7 +100,6 @@ export const Singers = connect(mapStateToProps, mapDispatchToProps)(
         const singerListJS = singerList ? singerList.toJS() : []
         const { data, dispatch } = useContext(CategoryDataContext) as any
         const { category, alpha } = data.toJS()
-        // const [category, setCategory] = useState({ name: '', key: '', type: 'type' })
         const handleUpdateCatetory = useCallback((key) => {
             const cat = categoryTypes.find(item => {
                 return item.key === key
@@ -109,17 +108,16 @@ export const Singers = connect(mapStateToProps, mapDispatchToProps)(
                 dispatch({ type: CHANGE_CATEGORY, data: cat })
                 updateDispatch(cat, alpha)
             }
-        }, [])
-        // const [alpha, setAlpha] = useState('')
+        }, [dispatch, alpha, updateDispatch])
         const handleUpdateAlpha = useCallback((val) => {
             dispatch({ type: CHANGE_ALPHA, data: val })
             updateDispatch(category, val)
-        }, [])
+        }, [dispatch, category, updateDispatch])
         useEffect(() => {
             if (!singerList.size) {
                 getHotSingerDispatch()
             }
-        }, [])
+        }, [getHotSingerDispatch,singerList.size])
         const handlePullUp = () => {
             pullUpRefreshDispatch(category, alpha, category.key === '', pageCount);
         };
