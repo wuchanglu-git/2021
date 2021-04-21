@@ -26,23 +26,27 @@ const HeaderContainer = styled.div`
 `
 // 处理函数组件拿不到 ref 的问题，所以用 forwardRef
 const Header = React.forwardRef((props: any, ref: any) => {
-    const { handleClick, title } = props;
-    return (
-        <HeaderContainer ref={ref}>
-            <img className="back" src={directionLeftSvg} onClick={handleClick} alt="music"/>
-            <h1>{title}</h1>
-        </HeaderContainer>
-    )
+  const { handleClick, title, isMarquee } = props;
+  return (
+    <HeaderContainer ref={ref}>
+      <img className="back" src={directionLeftSvg} onClick={handleClick} alt="music" />
+      {
+        //@ts-ignore
+        isMarquee ? <marquee><h1>{title}</h1></marquee> : <h1>{title}</h1>
+      }
+    </HeaderContainer>
+  )
 })
 
 Header.defaultProps = {
-    handleClick: () => { },
-    title: "标题",
+  handleClick: () => { },
+  title: "标题",
 };
 
 Header.propTypes = {
-    handleClick: PropTypes.func,
-    title: PropTypes.string,
+  handleClick: PropTypes.func,
+  title: PropTypes.string,
+  isMarquee: PropTypes.bool
 };
 
 export default React.memo(Header);
