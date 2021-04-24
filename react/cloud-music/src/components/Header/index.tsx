@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import style from '../../assets/global-style';
 import PropTypes from "prop-types";
 import directionLeftSvg from '../../assets/icon/direction-left.svg'
+import Marquee from '../../baseUI/Marquee'
 const HeaderContainer = styled.div`
   position: fixed;
   padding: 5px 10px;
@@ -32,7 +33,7 @@ const Header = React.forwardRef((props: any, ref: any) => {
       <img className="back" src={directionLeftSvg} onClick={handleClick} alt="music" />
       {
         //@ts-ignore
-        isMarquee ? <marquee><h1>{title}</h1></marquee> : <h1>{title}</h1>
+        isMarquee ? <Marquee><h1>{title}</h1></Marquee> : <h1>{title}</h1>
       }
     </HeaderContainer>
   )

@@ -21,3 +21,6 @@ export const getSingerListRequest = (
 export const getRankListRequest = () => {
   return axiosInstance.get("/toplist/detail");
 };
+export const getAlbumDetailRequest = (id: number | string) => {
+  return axiosInstance.get(`/playlist/detail?id=${id}`);
+};

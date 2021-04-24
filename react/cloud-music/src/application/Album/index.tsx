@@ -3,97 +3,50 @@ import { Container, TopDesc, Menu, SongItem, SongList } from "./style"
 import { CSSTransition } from 'react-transition-group'
 import Header from './../../components/Header';
 import Scroll from '../../components/Scroll'
-import { getName, getCount } from './../../api/utils';
+import Loading from '../../components/Loading'
+import { getName, getCount, isEmptyObject } from './../../api/utils';
+import { getAlbumList, changeEnterLoading } from './store/actionCreators'
+import { connect } from 'react-redux'
 // 首先引入
 import style from "../../assets/global-style"
 export const HEADER_HEIGHT = 45;
-//mock 数据
-const currentAlbum = {
+
+type CURRENT_ALBUM_TYPES = {
     creator: {
-        avatarUrl: "http://p1.music.126.net/O9zV6jeawR43pfiK2JaVSw==/109951164232128905.jpg",
-        nickname: "浪里推舟"
+        avatarUrl: string,
+        nickname: string,
     },
-    coverImgUrl: "http://p2.music.126.net/ecpXnH13-0QWpWQmqlR0gw==/109951164354856816.jpg",
-    subscribedCount: 2010711,
-    name: "听完就睡，耳机是天黑以后柔软的梦境",
-    tracks: [
-        {
-            name: "我真的受伤了",
-            ar: [{ name: "张学友" }, { name: "周华健" }],
-            al: {
-                name: "学友 热"
-            }
-        },
-        {
-            name: "我真的受伤了",
-            ar: [{ name: "张学友" }, { name: "周华健" }],
-            al: {
-                name: "学友 热"
-            }
-        },
-        {
-            name: "我真的受伤了",
-            ar: [{ name: "张学友" }, { name: "周华健" }],
-            al: {
-                name: "学友 热"
-            }
-        },
-        {
-            name: "我真的受伤了",
-            ar: [{ name: "张学友" }, { name: "周华健" }],
-            al: {
-                name: "学友 热"
-            }
-        },
-        {
-            name: "我真的受伤了",
-            ar: [{ name: "张学友" }, { name: "周华健" }],
-            al: {
-                name: "学友 热"
-            }
-        },
-        {
-            name: "我真的受伤了",
-            ar: [{ name: "张学友" }, { name: "周华健" }],
-            al: {
-                name: "学友 热"
-            }
-        },
-        {
-            name: "我真的受伤了",
-            ar: [{ name: "张学友" }, { name: "周华健" }],
-            al: {
-                name: "学友 热"
-            }
-        },
-        {
-            name: "我真的受伤了",
-            ar: [{ name: "张学友" }, { name: "周华健" }],
-            al: {
-                name: "学友 热"
-            }
-        },
-        {
-            name: "我真的受伤了",
-            ar: [{ name: "张学友" }, { name: "周华健" }],
-            al: {
-                name: "学友 热"
-            }
-        },
-        {
-            name: "我真的受伤了",
-            ar: [{ name: "张学友" }, { name: "周华健" }],
-            al: {
-                name: "学友 热"
-            }
-        },
-    ]
+    coverImgUrl: string,
+    subscribedCount: number,
+    name: string,
+    tracks: Array<{
+        name: string,
+        ar: Array<{ name: string }>,
+        al: {
+            name: string
+        }
+    }>
 }
-export const Album = memo(function Album(props: any) {
-    const { history } = props
+const mapStateToProps = (state: { getIn: (arg0: string[]) => any }) => ({
+    currentAlbum: state.getIn(['album', 'currentAlbum']),
+    enterLoading: state.getIn(['album', 'enterLoading']),
+})
+const mapDispatchToProps = (dispatch: any) => {
+    return {
+        getAlbumDataDispatch(id: number) {
+            dispatch(changeEnterLoading(true));
+            dispatch(getAlbumList(id));
+        },
+    }
+}
+export const Album = connect(mapStateToProps, mapDispatchToProps)(memo(function Album(props: any) {
+    const { history, currentAlbum: currentAlbumImmutable, enterLoading } = props
+    const id = props.match.params.id;
+    const { getAlbumDataDispatch } = props
+    const currentAlbum: CURRENT_ALBUM_TYPES = currentAlbumImmutable.toJS();
     const [showStatus, setShowStatus] = useState(true)
-    const [title, setTitle] = useState ("歌单");
-    const [isMarquee,setIsMarquee]=useState(false)
+    const [title, setTitle] = useState("歌单");
+    const [isMarquee, setIsMarquee] = useState(false)
     const headerEl = useRef()
     const handleBack = useCallback(
         () => {
@@ -101,23 +54,23 @@ export const Album = memo(function Album(props: any) {
         },
         [setShowStatus],
     )
-    const handleScroll = (pos:any) => {
+    const handleScroll = (pos: any) => {
         let minScrollY = -HEADER_HEIGHT;
-        let percent = Math.abs(pos.y/minScrollY);
-        let headerDom:any = headerEl.current||{};
+        let percent = Math.abs(pos.y / minScrollY);
+        let headerDom: any = headerEl.current || {};
         // 滑过顶部的高度开始变化
         if (pos.y < minScrollY) {
-          headerDom.style.backgroundColor = style["theme-color"];
-          headerDom.style.opacity = Math.min(1, (percent-1)/2);
-          setTitle (currentAlbum.name);
-          setIsMarquee (true);
+            headerDom.style.backgroundColor = style["theme-color"];
+            headerDom.style.opacity = Math.min(1, (percent - 1) / 2);
+            setTitle(currentAlbum.name);
+            setIsMarquee(true);
         } else {
-          headerDom.style.backgroundColor = "";
-          headerDom.style.opacity = 1;
-          setTitle ("歌单");
-          setIsMarquee (false);
+            headerDom.style.backgroundColor = "";
+            headerDom.style.opacity = 1;
+            setTitle("歌单");
+            setIsMarquee(false);
         }
-      };
+    };
     const container: any = useRef();
     useEffect(() => {
         console.log('- 刚开始时的 class 为：', container.current.classList.toString());
@@ -128,6 +81,9 @@ export const Album = memo(function Album(props: any) {
             attributes: true
         });
     }, []);
+    useEffect(() => {
+        getAlbumDataDispatch(id)
+    }, [getAlbumDataDispatch, id])
     return (
         <CSSTransition
             in={showStatus}
@@ -138,7 +94,7 @@ export const Album = memo(function Album(props: any) {
             onExited={history.goBack}>
             <Container ref={container}>
                 <Header ref={headerEl} isMarquee={isMarquee} title={title} handleClick={handleBack}></Header>
-                <Scroll bounceTop={false} onScroll={handleScroll}>
+                {isEmptyObject(currentAlbum) ? null : <Scroll bounceTop={false} onScroll={handleScroll}>
                     <div>
                         <TopDesc background={currentAlbum.coverImgUrl}>
                             <div className="background">
@@ -211,7 +167,9 @@ export const Album = memo(function Album(props: any) {
                         </SongList>
                     </div>
                 </Scroll>
+                }
+                {enterLoading ? <Loading></Loading> : null}
             </Container>
         </CSSTransition>
     )
-})
+}))
